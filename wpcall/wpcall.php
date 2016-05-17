@@ -23,5 +23,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with {Plugin Name}. If not, see {License URI}.*/
 
-echo "WPCall"
+echo "WPCall";
+/*
+if ( is_admin() ) {
+     // We are in admin mode
+ 	echo "admin"
+}
+*/
 ?>
