@@ -57,27 +57,40 @@ function wpcall_options_page() {
     ?>
     <div class="wrap">
           <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-        your form goes here
-
-<?php
-
-
-class new_general_setting {
-    function new_general_setting( ) {
-        add_filter( 'admin_init' , array( &$this , 'register_fields' ) );
-    }
-    function register_fields() {
-        register_setting( 'general', 'favorite_color', 'esc_attr' );
-        add_settings_field('fav_color', '<label for="favorite_color">'.__('Favorite Color?' , 'favorite_color' ).'</label>' , array(&$this, 'fields_html') , 'general' );
-    }
-    function fields_html() {
-        $value = get_option( 'favorite_color', '' );
-        echo '<input type="text" id="favorite_color" name="favorite_color" value="' . $value . '" />';
-    }
-}
-$new_general_setting = new new_general_setting();
-?>
+        <form method="post" action="options.php">
+	        <?php
+	            settings_fields("section");
+	            do_settings_sections("theme-options");      
+	            submit_button(); 
+	        ?>          
+	    </form>
     </div>
 <?php
 }
+
+function display_ws_element()
+{	
+	echo '<input type="text" name="ws_url" id="ws_url" value="' . get_option('ws_url') . '" />';
+}
+
+function display_sipOutboundProxy_element()
+{
+	
+    echo '<input type="text" name="sipOutboundProxy" id="sipOutboundProxy" value="'. get_option('sipOutboundProxy') . '" />';
+    
+}
+
+function display_theme_panel_fields()
+{
+	add_settings_section("section", "All Settings", null, "theme-options");
+	
+	add_settings_field("ws_url", "WebSocket Server URL", "display_ws_element", "theme-options", "section");
+    add_settings_field("sipOutboundProxy", "SIP Outbound Proxy URL", "display_sipOutboundProxy_element", "theme-options", "section");
+
+    register_setting("section", "ws_url");
+    register_setting("section", "sipOutboundProxy");
+}
+
+add_action("admin_init", "display_theme_panel_fields");
 ?>
+
