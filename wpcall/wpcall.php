@@ -92,5 +92,49 @@ function display_theme_panel_fields()
 }
 
 add_action("admin_init", "display_theme_panel_fields");
+
+
+function wpcall_add_endpoints()
+{
+    add_rewrite_endpoint( 'wpcall*', EP_PAGES );
+}
+add_action('init', 'wpcall_add_endpoints');
+
+function wpcall_plugin_redirect() {
+    global $wp;
+ 
+    if ( !isset( $wp->query_vars['name'] ) || $wp->query_vars['name'] != "wpcall" )
+        return;
+    
+    // include custom template
+    include dirname( __FILE__ ) . '/wpcall-template.php';
+    exit;
+}
+ add_action( 'template_redirect', 'wpcall_plugin_redirect' );
+
+//wp_enqueue_script( 'my-script-handle', plugin_dir_url( __FILE__ ) . 'assets/my-file' . $suffix . '.js', array( 'jquery' ) );
+function myplugin_scripts() {
+  echo "denenmemeee";
+    wp_register_style( 'wpcall-styles', plugin_dir_url( __FILE__ ) . '/css/style.css' );
+    wp_register_style( 'wpcall-style-horizontal', plugin_dir_url( __FILE__ ) . '/css/style-horizontal.css' );
+    wp_register_style( 'wpcall-skins', plugin_dir_url( __FILE__ ) . '/css/skins.css' );
+    wp_register_style( 'wpcall_jqueryui', plugin_dir_url( __FILE__ ) . '/css/jquery-ui.css' );
+    wp_register_style( 'wpcall_font-awesome', plugin_dir_url( __FILE__ ) . '/css/font-awesome.min.css' );
+    wp_enqueue_style( 'wpcall-styles' );
+    wp_enqueue_style( 'wpcall-style-horizontal' );
+    wp_enqueue_style( 'wpcall-skins' );
+    wp_enqueue_style( 'wpcall-jquery-ui' );
+    wp_enqueue_style( 'wpcall_font-awesome' );
+}
+add_action( 'wp_print_scripts', 'myplugin_scripts' );
+/*
+function myplugin_scripts() {
+  echo "styles";
+  echo is_readable(plugin_dir_url( __FILE__ ) . '/css/style.css');
+    wp_register_style( 'wpcall-styles', plugin_dir_url( __FILE__ ) . '/css/style.css', array(), '0.1', 'screen' );
+    wp_enqueue_style( 'wpcall-styles' );
+}
+add_action( 'wp_enqueue_scripts', 'myplugin_scripts' );
+*/
 ?>
 
