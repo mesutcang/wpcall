@@ -116,7 +116,7 @@ function wpcall_plugin_redirect() {
 function wpcall_sytle_scripts() {
     wp_register_style( 'wpcall-styles', plugin_dir_url( __FILE__ ) . '/css/style.css' );
     wp_register_style( 'wpcall-style-horizontal', plugin_dir_url( __FILE__ ) . '/css/style-horizontal.css' );
-    wp_register_style( 'wpcall-skins', plugin_dir_url( __FILE__ ) . '/css/skins.css' );
+    wp_register_style( 'wpcall-skins', plugin_dir_url( __FILE__ ) . '/css/skin.css' );
     wp_register_style( 'wpcall-jquery-ui', plugin_dir_url( __FILE__ ) . '/css/jquery-ui.css' );
     wp_register_style( 'wpcall-font-awesome', plugin_dir_url( __FILE__ ) . '/css/font-awesome.min.css' );
     wp_enqueue_style( 'wpcall-styles' );
