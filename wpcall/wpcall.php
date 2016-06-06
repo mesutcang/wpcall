@@ -126,13 +126,14 @@ function wpcall_sytle_scripts() {
     wp_enqueue_style( 'wpcall-font-awesome' );
 
     wp_register_script( 'wpcall-jquery', plugin_dir_url( __FILE__ ) . '/js/jquery.js' );
-    wp_register_script( 'wpcall-arbiter', plugin_dir_url( __FILE__ ) . '/js/Arbiter.js' );
-    wp_register_script( 'wpcall-jquery.i18n.properties', plugin_dir_url( __FILE__ ) . '/js/jquery.i18n.properties.js' );
-    wp_register_script( 'wpcall-jquery-ui', plugin_dir_url( __FILE__ ) . '/js/jquery-ui.js' );
-    wp_register_script( 'wpcall-jssip', plugin_dir_url( __FILE__ ) . '/js/jssip.js' );
-    wp_register_script( 'wpcall-init', plugin_dir_url( __FILE__ ) . '/js/init.js' );
-    wp_register_script( 'wpcall-config', plugin_dir_url( __FILE__ ) . '/js/config.js' );
-    wp_register_script( 'wpcall-JSComm', plugin_dir_url( __FILE__ ) . '/js/JSComm.js' );
+    wp_register_script( 'wpcall-arbiter', plugin_dir_url( __FILE__ ) . '/js/Arbiter.js', array( 'jquery' )  );
+    wp_register_script( 'wpcall-jquery.i18n.properties', plugin_dir_url( __FILE__ ) . '/js/jquery.i18n.properties.js', array( 'jquery' ));
+    wp_register_script( 'wpcall-jquery-ui', plugin_dir_url( __FILE__ ) . '/js/jquery-ui.js', array( 'jquery' )  );
+    wp_register_script( 'wpcall-jssip', plugin_dir_url( __FILE__ ) . '/js/jssip.js', array( 'jquery' )  );
+    wp_register_script( 'wpcall-init', plugin_dir_url( __FILE__ ) . '/js/init.js', array( 'jquery' )  );
+    wp_register_script( 'wpcall-config', plugin_dir_url( __FILE__ ) . '/js/config.js', array( 'jquery' )  );
+    wp_register_script( 'wpcall-JSComm', plugin_dir_url( __FILE__ ) . '/js/JSComm.js', array( 'jquery' ) );
+    
     wp_enqueue_script( 'wpcall-jquery' );
     wp_enqueue_script( 'wpcall-arbiter' );
     wp_enqueue_script( 'wpcall-jquery.i18n.properties' );
@@ -143,7 +144,8 @@ function wpcall_sytle_scripts() {
     wp_enqueue_script( 'wpcall-JSComm' );
 
 }
-add_action( 'wp_print_footer_scripts', 'wpcall_sytle_scripts' );
+//add_action( 'wp_print_footer_scripts', 'wpcall_sytle_scripts' );
+add_action( 'wp_enqueue_scripts', 'wpcall_sytle_scripts' );
 /*
 function myplugin_scripts() {
   echo "styles";
